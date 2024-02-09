@@ -38,6 +38,53 @@ res.json({ status: "success" });
 
 
 
+router.post("/signin",async(req,res)=>{
+    let input=req.body
+    
+    
+    let email=req.body.email
+    let data=await usersrouter.findOne({"email": email})
+    if(!data)
+    {
+        return res.json(
+            {
+                "status":"invalid user"
+            }
+        )
+    }
+console.log(data)
+let dbpassword=data.password
+let inputpswd=req.body.password
+console.log(dbpassword)
+console.log(inputpswd)
+const match=await bcrypt.compare(inputpswd,dbpassword)
+if(!match){
+    return res.json(
+        {
+            "status":"invalid password"
+        }
+    )
+}
+  
+
+res.json(
+    {
+        "status":"success"
+    }
+)
+
+
+
+
+}
+
+
+
+
+)
+
+
+
 
 
 module.exports = router;
