@@ -69,7 +69,7 @@ if(!match){
 
 res.json(
     {
-        "status":"success"
+        "status":"success","userdata":data
     }
 )
 
